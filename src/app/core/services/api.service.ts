@@ -12,24 +12,48 @@ export class ApiService {
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(path, { params }).pipe(catchError(this.formatErrors));
+    return this.http
+      .get(path, {
+        params,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .pipe(catchError(this.formatErrors));
   }
 
   put(path: string, body: Object = {}): Observable<any> {
     return this.http
-      .put(path, JSON.stringify(body))
+      .put(path, JSON.stringify(body), {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
       .pipe(catchError(this.formatErrors));
   }
 
   post(path: string, body: Object = {}): Observable<any> {
     return this.http
-      .post(path, JSON.stringify(body))
+      .post(path, JSON.stringify(body), {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
       .pipe(catchError(this.formatErrors));
   }
 
   delete(path: string, body: Object = {}): Observable<any> {
     return this.http
-      .delete(path, { body: body })
+      .delete(path, {
+        body: body,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
       .pipe(catchError(this.formatErrors));
   }
 }

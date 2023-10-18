@@ -11,7 +11,8 @@ export class AppService {
 
   sendEmailsForProcessing(emails: any[]): Observable<any> {
     return this.apiService.post(
-      eval('`' + environment.baseUrl + environment.verifyEmailsApi + '`'), {emails}
+      eval('`' + environment.baseUrl + environment.verifyEmailsApi + '`'),
+      { emails }
     );
   }
 }
