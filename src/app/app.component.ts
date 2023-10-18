@@ -18,20 +18,24 @@ export class AppComponent {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any = [];
+  showLoader!: boolean;
 
   constructor(private appService: AppService) {}
 
   sendRequest() {
     if (this.emails?.trim() == '') return;
+    this.showLoader = true;
     this.emailsArray = this.emails.split(',').map((el) => el.trim());
     this.appService.sendEmailsForProcessing(this.emailsArray).subscribe({
       next: (data) => {
+        this.showLoader = false;
         this.apiResponse = true;
         this.dataSource = new MatTableDataSource(data.emails);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
       error: (err) => {
+        this.showLoader = false;
         console.log(err);
       },
     });

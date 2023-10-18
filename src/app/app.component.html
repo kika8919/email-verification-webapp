@@ -1,16 +1,20 @@
 <div class="container">
   <div class="centered-content">
-    <mat-form-field>
+    <mat-form-field style="width: 50vw">
       <textarea
         matInput
         [(ngModel)]="emails"
         placeholder="Enter comma separated emails"
       ></textarea>
     </mat-form-field>
-    <button mat-raised-button (click)="sendRequest()">Send</button>
+    <button style="width: 10vw" mat-raised-button (click)="sendRequest()">
+      Send
+    </button>
+    <div *ngIf="showLoader" class="table-centered">
+      <span><mat-spinner diameter="15"></mat-spinner>&nbsp;Loading...</span>
+    </div>
   </div>
 </div>
-
 <div class="table-container" *ngIf="apiResponse">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="email">
