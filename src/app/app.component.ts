@@ -12,7 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AppComponent {
   apiResponse: any = false;
-  displayedColumns: string[] = ['email', 'isValid', 'response']; // Add more column names as needed
+  displayedColumns: string[] = ['email', 'isValid', 'isCatchAllEmail', 'response']; // Add more column names as needed
   emails: string = '';
   emailsArray: any[] = [];
   @ViewChild(MatSort) sort!: MatSort;
