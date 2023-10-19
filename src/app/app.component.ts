@@ -12,7 +12,12 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AppComponent {
   apiResponse: any = false;
-  displayedColumns: string[] = ['email', 'isValid', 'isCatchAllEmail', 'response']; // Add more column names as needed
+  displayedColumns: string[] = [
+    'email',
+    'isValid',
+    'isCatchAllEmail',
+    'response',
+  ]; // Add more column names as needed
   emails: string = '';
   emailsArray: any[] = [];
   @ViewChild(MatSort) sort!: MatSort;
@@ -30,7 +35,15 @@ export class AppComponent {
       next: (data) => {
         this.showLoader = false;
         this.apiResponse = true;
-        this.dataSource = new MatTableDataSource(data.emails);
+
+        let emails = data.emails.map((ob: any) => {
+          console.log(Array.isArray(ob.response));
+          if (Array.isArray(ob.response)) {
+            ob.response = ob.response.join('\n');
+          }
+          return ob;
+        });
+        this.dataSource = new MatTableDataSource(emails);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
